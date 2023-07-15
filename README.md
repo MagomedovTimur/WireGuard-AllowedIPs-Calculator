@@ -1,5 +1,5 @@
 ### WireGuard AllowedIPs Calculator is a script that simplifies the creation of an AllowedIPs string for wireguard configuration
-AllowedIPs string is created by subtracting disallowed networks from allowed networks and generating a complex AllowedIPs string
+AllowedIPs is created by subtracting disallowed networks from allowed networks and generating a complex string
 
 Usage examples: 
 	
