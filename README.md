@@ -17,9 +17,9 @@ Usage examples:
 
 Keys: 
 
-	-a \<network/mask\[,network2/mask\]\[,network3/mask\],...\>: Allowed networks. Leave blank for 0.0.0.0/0
-	-d \<network/mask\[,network2/mask\]\[,network3/mask\],...\>: Disallowed networks. Optional if "-e" is used
-	-r \<Wiregurad allowedNets string\>: Reverse wiregurad config string to allowed and disallowed networks
+	-a <network/mask\[,network2/mask\]\[,network3/mask\],...>: Allowed networks. Leave blank for 0.0.0.0/0
+	-d <network/mask\[,network2/mask\]\[,network3/mask\],...>: Disallowed networks. Optional if "-e" is used
+	-r <Wiregurad allowedNets string>: Reverse wiregurad config string to allowed and disallowed networks
 	-e: Preset for fast excluding local networks
 	-h: print help message to console
 
