@@ -8,6 +8,9 @@ Usage examples:
 
 	wireguard-ip-calculator.py -d 192.168.0.0/16
 	Allow all networks exclude 192.168.0.0/16
+ 
+	wireguard-ip-calculator.py -d 100.100.100.0/24 -e
+	Allow all networks exclude 100.100.100.0/24 and local networks
 
 	wireguard-ip-calculator.py -a 0.0.0.0/0 -e
 	Allow all networks exclude local netowrks
