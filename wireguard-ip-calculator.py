@@ -4,6 +4,59 @@ from ipaddress import IPv4Network
 from ipaddress import IPv4Address	
 from ipaddress import summarize_address_range
 
+  
+# Default network sorting algorithm takes into account the network mask.
+# We need to sort network only by netowrk address
+def mySorted(netArray):
+	
+	i = 0
+
+	while i < len(netArray) - 1:
+
+		a = (netArray[i].split('/'))[0]
+		b = (netArray[i+1].split('/'))[0]
+
+		# Breaking into the int(octets
+		octetsA = a.split(".")
+		octetsB = b.split(".")
+		
+		# Condition if the IP Address
+		# is same then return 0
+		if int(octetsA[0]) > int(octetsB[0]):
+			current = netArray[i]
+			netArray[i] = netArray[i+1]
+			netArray[i+1] = current
+			i=0
+		elif int(octetsA[0]) < int(octetsB[0]):
+			pass
+		elif int(octetsA[1]) > int(octetsB[1]):
+			current = netArray[i]
+			netArray[i] = netArray[i+1]
+			netArray[i+1] = current
+			i=0
+		elif int(octetsA[1]) < int(octetsB[1]):
+			pass
+		elif int(octetsA[2]) > int(octetsB[2]):
+			current = netArray[i]
+			netArray[i] = netArray[i+1]
+			netArray[i+1] = current
+			i=0
+		elif int(octetsA[2]) < int(octetsB[2]):
+			pass
+		elif int(octetsA[3]) > int(octetsB[3]):
+			current = netArray[i]
+			netArray[i] = netArray[i+1]
+			netArray[i+1] = current
+			i=0
+		elif int(octetsA[3]) < int(octetsB[3]):
+			i+=1
+			pass
+
+		i+=1
+
+	return netArray
+
+
 def convertRangesToNets(netRange):
 	
 	result = []
@@ -27,7 +80,6 @@ def rangeSubstraction(allowedRange, disallowedRange):
 				allowedRange.pop(i)
 				i=0
 				break
-
 			if (allowedRange[i][0] < disallowedNet[0]) and (allowedRange[i][1] > disallowedNet[1]):
 				allowedRange.append([allowedRange[i][0], (disallowedNet[0])-1])
 				allowedRange.append([disallowedNet[1]+1, allowedRange[i][1]])
@@ -45,11 +97,9 @@ def rangeSubstraction(allowedRange, disallowedRange):
 				i=0
 				break
 		i+=1
-	
 	return allowedRange
 
 def summarizeNets(IPArr):
-	
 	# Insert all nets as a start and end addresses
 	IPrange = []
 	for currentNetwork in IPArr:
@@ -62,14 +112,15 @@ def summarizeNets(IPArr):
 			if IPrange[i][0] <= IPrange[i+1][0]:
 				if IPrange[i][1] <= IPrange[i+1][1]:
 					IPrange[i] = [IPrange[i][0], IPrange[i+1][1]]
+
 				else:
 					IPrange[i] = [IPrange[i][0], IPrange[i][1]]
 			else:
+				print(str(IPrange[i][0]) +'>'+ str(IPrange[i+1][0]))
 				if IPrange[i][1] <= IPrange[i+1][1]:
 					IPrange[i] = [IPrange[i+1][0], IPrange[i+1][1]]
 				else:
 					IPrange[i] = [IPrange[i+1][0], IPrange[i][1]]
-
 			IPrange.pop(i+1)
 			i=0
 		i+=1
@@ -83,8 +134,8 @@ def mainCalculator(allowedNet, disallowedNet):
 	disallowedNetTextArr = disallowedNet.split(',')
 
 	# Sorting IP arrays 
-	allowedNetTextArr = sorted(allowedNetTextArr)
-	disallowedNetTextArr = sorted(disallowedNetTextArr)
+	allowedNetTextArr = mySorted(allowedNetTextArr)
+	disallowedNetTextArr = mySorted(disallowedNetTextArr)
 
 	# Pushing text ip addresses from arrays to ipaddress.ip_network array
 	allowedNetArr = []
@@ -121,17 +172,23 @@ def mainCalculator(allowedNet, disallowedNet):
 
 	# Converting result ranges to result array with ip networks
 	resultArray = convertRangesToNets(resultRanges)
-	
+
 	# Sorting netowrk result array 
 	resultArray = sorted(resultArray)
 
 	# Printing result
+	result = 'AllowedIPs = '
 
-	print('AllowedIPs = ', end='')
-	for i in range(0, len(resultArray)-1):
-		print(resultArray[i], end=', ')
+	if len(resultArray) == 0:
+		print('There are no allowed networks!')
+	elif len(resultArray) == 1:
+		result += str(resultArray[0])
+	else:
+		for i in range(0, len(resultArray)-1):
+			result += str(resultArray[i]) + ','
+		result = result[:-1]
 
-	print(resultArray[len(resultArray)-1])
+	print(result)
 
 
 
@@ -182,7 +239,6 @@ def main():
 		except ValueError:
 			print('Either a disallowed or preset networks are needed')
 			return
-
 
 	mainCalculator(allowedNet, disallowedNet)
 	return
