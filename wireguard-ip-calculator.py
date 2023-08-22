@@ -116,7 +116,6 @@ def summarizeNets(IPArr):
 				else:
 					IPrange[i] = [IPrange[i][0], IPrange[i][1]]
 			else:
-				print(str(IPrange[i][0]) +'>'+ str(IPrange[i+1][0]))
 				if IPrange[i][1] <= IPrange[i+1][1]:
 					IPrange[i] = [IPrange[i+1][0], IPrange[i+1][1]]
 				else:
