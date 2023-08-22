@@ -12,7 +12,6 @@ def mySorted(netArray):
 	i = 0
 
 	while i < len(netArray) - 1:
-
 		a = (netArray[i].split('/'))[0]
 		b = (netArray[i+1].split('/'))[0]
 
@@ -20,39 +19,35 @@ def mySorted(netArray):
 		octetsA = a.split(".")
 		octetsB = b.split(".")
 		
-		# Condition if the IP Address
-		# is same then return 0
 		if int(octetsA[0]) > int(octetsB[0]):
 			current = netArray[i]
 			netArray[i] = netArray[i+1]
 			netArray[i+1] = current
-			i=0
+			i=-1
 		elif int(octetsA[0]) < int(octetsB[0]):
 			pass
 		elif int(octetsA[1]) > int(octetsB[1]):
 			current = netArray[i]
 			netArray[i] = netArray[i+1]
 			netArray[i+1] = current
-			i=0
+			i=-1
 		elif int(octetsA[1]) < int(octetsB[1]):
 			pass
 		elif int(octetsA[2]) > int(octetsB[2]):
 			current = netArray[i]
 			netArray[i] = netArray[i+1]
 			netArray[i+1] = current
-			i=0
+			i=-1
 		elif int(octetsA[2]) < int(octetsB[2]):
 			pass
 		elif int(octetsA[3]) > int(octetsB[3]):
 			current = netArray[i]
 			netArray[i] = netArray[i+1]
 			netArray[i+1] = current
-			i=0
+			i=-1
 		elif int(octetsA[3]) < int(octetsB[3]):
-			i+=1
 			pass
-
-		i+=1
+		i+=1		
 
 	return netArray
 
