@@ -18,6 +18,8 @@ Usage examples:
 	wireguard-ip-calculator.py -e
 	Allow all networks exclude local netowrks
 
+ 	wireguard-ip-calculator.py -a 10.10.0.0/16 -d 10.10.20.0/24,10.10.10.100/32
+	Allow network 10.10.0.0/16 but disallow network 10.10.20.0/24 and host 10.10.10.100
 Keys: 
 
 	-a <network/mask[,network2/mask][,network3/mask],...>: Allowed networks. Leave blank for 0.0.0.0/0
